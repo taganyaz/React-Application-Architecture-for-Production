@@ -12,3 +12,8 @@ export type CreateJobData = Pick<
   Job,
   'position' | 'department' | 'location' | 'info'
 >;
+
+export type UpdateJobData = Pick<
+  Job,
+  'position' | 'department' | 'location' | 'info'
+>;

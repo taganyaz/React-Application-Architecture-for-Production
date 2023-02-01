@@ -1,3 +1,4 @@
+import { Button, Stack } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { ReactElement } from 'react';
 
@@ -29,7 +30,28 @@ const DashboardJobPage = () => {
       <Seo
         title={`${job.data.position} | ${job.data.location}`}
       />
-      <DashboardJobInfo job={job.data} />
+      <Stack w="full">
+        <DashboardJobInfo job={job.data} />
+        <Stack w="full" direction="row">
+          <Button
+            bg="primary"
+            color="primaryAccent"
+            as="a"
+            href={`/dashboard/jobs/${jobId}/update`}
+            _hover={{
+              opacity: 0.9,
+            }}
+          >
+            Edit
+          </Button>
+          <Button
+            bg="orange"
+            onClick={() => router.push('/dashboard/jobs')}
+          >
+            Back to List
+          </Button>
+        </Stack>
+      </Stack>
     </>
   );
 };
