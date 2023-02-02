@@ -1,6 +1,14 @@
-import { Box, Button, Stack } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Radio,
+  RadioGroup,
+  Stack,
+} from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
 import { InputField } from '@/components/form';
 
@@ -19,7 +27,7 @@ export const UpdateJobForm = ({
   const updateJob = useUpdateJob({ onSuccess });
   const router = useRouter();
 
-  const { register, handleSubmit, formState } =
+  const { register, handleSubmit, formState, control } =
     useForm<UpdateJobData>({
       defaultValues: { ...job },
     });
@@ -64,6 +72,27 @@ export const UpdateJobForm = ({
           })}
           error={formState.errors['info']}
         />
+        <FormControl>
+          <FormLabel>Status</FormLabel>
+          <Controller
+            name="status"
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <RadioGroup
+                onChange={onChange}
+                value={value}
+                isDisabled={job.status === 'published'}
+              >
+                <Stack direction="row">
+                  <Radio value="draft">Draft</Radio>
+                  <Radio value="published">
+                    Published
+                  </Radio>
+                </Stack>
+              </RadioGroup>
+            )}
+          />
+        </FormControl>
         <Stack w="full" direction="row" spacing="8">
           <Button
             bg="primary"

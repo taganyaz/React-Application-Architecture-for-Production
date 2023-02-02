@@ -12,13 +12,15 @@ const getJobsHandler = rest.get(
       'organizationId'
     ) as string;
 
-    const jobs = db.job.findMany({
-      where: {
-        organizationId: {
-          equals: organizationId,
-        },
-      },
-    });
+    const jobs = !organizationId
+      ? db.job.getAll()
+      : db.job.findMany({
+          where: {
+            organizationId: {
+              equals: organizationId,
+            },
+          },
+        });
 
     return res(
       ctx.delay(300),
@@ -67,6 +69,7 @@ const createJobHandler = rest.post(
     const job = db.job.create({
       ...jobData,
       organizationId: user?.organizationId,
+      status: 'draft',
     });
 
     return res(

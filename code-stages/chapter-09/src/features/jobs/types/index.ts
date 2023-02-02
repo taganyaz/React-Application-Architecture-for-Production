@@ -6,6 +6,7 @@ export type Job = Entity & {
   info: string;
   location: string;
   department: string;
+  status?: string;
 };
 
 export type CreateJobData = Pick<
@@ -15,5 +16,9 @@ export type CreateJobData = Pick<
 
 export type UpdateJobData = Pick<
   Job,
-  'position' | 'department' | 'location' | 'info'
+  | 'position'
+  | 'department'
+  | 'location'
+  | 'info'
+  | 'status'
 >;

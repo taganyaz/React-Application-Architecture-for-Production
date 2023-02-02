@@ -11,6 +11,7 @@ const initializeMocks = () => {
     worker.start();
   }
   seedDb();
+  console.log('Initializing data');
 };
 
 initializeMocks();

@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { apiClient } from '@/lib/api-client';
+import { queryKeys } from '@/lib/react-query';
 
 import { Organization } from '../types';
 
@@ -20,7 +21,7 @@ export const useOrganization = ({
   organizationId,
 }: GetOrganizationOptions) => {
   const { data, isLoading } = useQuery({
-    queryKey: ['organizations', organizationId],
+    queryKey: queryKeys.organizations.one(organizationId), //['organizations', organizationId],
     queryFn: () => getOrganization({ organizationId }),
   });
 

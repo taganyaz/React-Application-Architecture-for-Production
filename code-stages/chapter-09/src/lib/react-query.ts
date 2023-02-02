@@ -9,3 +9,24 @@ export const queryClient = new QueryClient({
     },
   },
 });
+
+const getQueryKeys = (baseKey: string) => {
+  return {
+    all: [baseKey],
+    many: (params: Record<string, unknown>) => [
+      baseKey,
+      params,
+    ],
+    one: (id: string) => [baseKey, id],
+  };
+};
+
+export const queryKeys = {
+  auth: {
+    authUser: ['auth-user'],
+  },
+  jobs: getQueryKeys('jobs'),
+  organizations: {
+    one: getQueryKeys('organizations').one,
+  },
+};
